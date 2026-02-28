@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dashboard</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<h1>Teacher Dashboard</h1>
+<button onclick="startCamera()">Start Camera</button>
+<button onclick="stopCamera()">Stop Camera</button>
+<button onclick="location.href='/attendance'">View Attendance</button>
+<button onclick="location.href='/logout'">Logout</button>
+
+<br><br>
+
+<input id="username" placeholder="Student Name">
+<button onclick="addUser()">Add User</button>
+<button onclick="deleteUser()">Delete User</button>
+
+<div>
+    <img id="video" style="display:none; width:640px; border:2px solid black;">
+</div>
+
+<script>
+
+function addUser(){
+    let name = document.getElementById("username").value
+
+    fetch("/add_user", {
+        method:"POST",
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({name:name})
+    })
+    .then(res => res.json())
+    .then(data => alert(data.message))
+}
+
+function deleteUser(){
+    let name = document.getElementById("username").value
+
+    fetch("/delete_user", {
+        method:"POST",
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({name:name})
+    })
+    .then(res => res.json())
+    .then(data => alert(data.message))
+}
+ 
+
+function startCamera(){
+    fetch("/start_camera", {
+        method: "POST"
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert(data.status);
+
+        // show video feed automatically
+        const video = document.getElementById("video");
+        video.src = "/video";
+        video.style.display = "block";
+    });
+}
+
+function stopCamera(){
+    fetch("/stop_camera", {
+        method: "POST"
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert(data.status);
+
+        // hide video feed
+        const video = document.getElementById("video");
+        video.src = "";
+        video.style.display = "none";
+    });
+}
+
+</script>
+
+</body>
+</html>
