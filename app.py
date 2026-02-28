@@ -1,3 +1,4 @@
+#this is group face recognition system 
 from flask import Flask, render_template, Response, request, jsonify, redirect, url_for, session
 import cv2
 import pickle
