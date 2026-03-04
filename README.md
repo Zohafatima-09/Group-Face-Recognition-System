@@ -1,4 +1,12 @@
-# Group-Face-Recognition-System
+#SMART ATTEND - AI-BASED FACE ATTENDENCE SYSTEM 
+
+This project automates attendance using facial recognition technology — eliminating manual errors, reducing proxy attendance, and saving time.
+
+## Key Features
+- Real-time face detection
+- Automated attendance marking
+- High accuracy recognition
+- Secure and efficient system
 
 ##  Project Description
 This project is an AI-based Attendance System using Face Recognition.
